@@ -1290,7 +1290,7 @@ transition: var(--transition);
     margin: 36px 0;
     box-shadow: 0 8px 30px rgba(2, 24, 64, 0.04);
     /* Imagen de fondo con overlay oscuro para legibilidad. Cambia la ruta si necesitas otra imagen. */
-    background-image: linear-gradient(rgba(2, 8, 23, 0.55), rgba(2, 8, 23, 0.35)), url('img/sss.png');
+    background-image: linear-gradient(rgba(2, 8, 23, 0.55), rgba(2, 8, 23, 0.35)), url('/sai-v1/img/sss.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1306,7 +1306,7 @@ transition: var(--transition);
 
 /* Usa la misma imagen/overlay que el hero; cambia la ruta si necesitas otra */
 .section-mv {
-    background-image: linear-gradient(rgba(2, 8, 23, 0.55), rgba(2, 8, 23, 0.35)), url('img/sss.png');
+    background-image: linear-gradient(rgba(2, 8, 23, 0.55), rgba(2, 8, 23, 0.35)), url('/sai-v1/img/sss.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
