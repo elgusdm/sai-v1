@@ -282,7 +282,8 @@ a {
 }
 
 .header.scroll-active .nav-link {
-    color: var(--color-primary);
+    /* En desktop, los links del header se vuelven claros al hacer scroll */
+    color: var(--color-text-light);
 }
 
 .header.scroll-active .nav-link:hover {
@@ -981,6 +982,24 @@ transition: var(--transition);
     .casos-grid {
         grid-template-columns: 1fr;
     }
+
+    /* En móvil, mantener el color original (estado top) aunque el header esté en scroll */
+    .header.scroll-active .nav-menu a,
+    .header.scroll-active .nav-menu .nav-link,
+    .header.scroll-active .nav-link {
+        color: var(--color-primary) !important;
+    }
+
+    /* Mantener el color de las barras del hamburger en móvil */
+    .header.scroll-active .hamburger span {
+        background-color: var(--color-primary) !important;
+    }
+
+    /* Cuando el menú móvil está abierto, asegurar enlaces legibles */
+    .nav-menu.active a,
+    .nav-menu.active .nav-link {
+        color: var(--color-primary);
+    }
 }
 
 @media (max-width: 480px) {
@@ -1077,7 +1096,8 @@ transition: var(--transition);
 /* Se colocan después para vencer reglas previas por cascada */
 .header.scroll-active .nav-menu a,
 .header.scroll-active .nav-menu .nav-link {
-    color: var(--color-primary);
+    /* En desktop, usar texto claro para contraste con fondo oscuro al hacer scroll */
+    color: var(--color-text-light);
 }
 
 .header.scroll-active .nav-menu a:hover,
