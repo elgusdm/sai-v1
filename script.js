@@ -206,6 +206,7 @@ console.log('%cPágina cargada correctamente', 'color: #011C51; font-size: 12px;
 // ============ SERVICE MODAL ============
 function initializeServiceModal() {
     const modal = document.getElementById('service-modal');
+    if (!modal) return; // safe-guard: skip service modal setup on pages that don't include it
     const modalTitle = modal.querySelector('.modal-title');
     const modalSubtitle = modal.querySelector('.modal-subtitle');
     const modalDescription = modal.querySelector('.modal-description');
@@ -298,36 +299,20 @@ function initializeServiceModal() {
                 li.textContent = p;
                 modalPoints.appendChild(li);
             });
-            // Si el dato ya contiene mailto lo usamos, si no generamos un mailto profesional
-            const defaultEmail = 'contacto@sai.com';
-            let href;
-            if (data.ctaHref && typeof data.ctaHref === 'string' && data.ctaHref.startsWith('mailto:')) {
-                href = data.ctaHref;
-            } else {
-                // Volver a usar las secuencias literales %0D%0A (CRLF) en el body
-                const bodyEncoded = 'Hola,%0D%0A%0D%0AMe interesa recibir más información sobre: ' + encodeURIComponent(data.title) + '.%0D%0A%0D%0AQuedo atento.%0D%0A';
-                href = `mailto:${defaultEmail}?subject=${encodeURIComponent('Interés: ' + data.title)}&body=${bodyEncoded}`;
-            }
-            modalCta.setAttribute('href', href);
 
-            // Fallback: reemplazamos el handler para forzar apertura del mailto
-            // Usamos onclick (reemplaza listeners previos) e intentamos abrir en nueva pestaña
+            // Botón: scroll a contacto y cierra modal, con estilo btn-primary
+            modalCta.setAttribute('href', '#contacto');
+            modalCta.classList.remove('btn-secondary', 'btn-accent');
+            modalCta.classList.add('btn', 'btn-primary');
             modalCta.onclick = function (ev) {
-                const h = this.getAttribute('href') || '';
-                if (!h.startsWith('mailto:')) return;
-                try {
-                    const w = window.open(h, '_blank');
-                    if (w) {
-                        w.focus();
-                        ev.preventDefault();
-                        return;
-                    }
-                } catch (err) {
-                    // ignore
-                }
-                // Si falló abrir una nueva ventana, navegar la ventana actual
                 ev.preventDefault();
-                window.location.href = h;
+                closeModal(modal);
+                const contacto = document.getElementById('contacto');
+                if (contacto) {
+                    setTimeout(() => {
+                        contacto.scrollIntoView({ behavior: 'smooth' });
+                    }, 180);
+                }
             };
 
             openModal(modal);

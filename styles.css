@@ -95,18 +95,24 @@ a {
 
 .btn:active::before {
     width: 300px;
-    height: 300px;
-}
 
-.btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    border: 2px solid var(--color-primary);
-}
+    .modal-panel {
+        position: relative;
+        /* Look & feel similar to servicio-card */
+        background-color: var(--color-gray-light);
+        border-radius: 12px;
+        padding: 28px;
+        width: 100%;
+        max-width: 720px;
+        box-shadow: var(--box-shadow);
+        /* subtle left accent like servicio cards */
+        border: 2px solid transparent;
+        border-left: 6px solid var(--color-accent);
+        transform: translateY(10px);
+        opacity: 0;
+        transition: transform 260ms cubic-bezier(.2, .9, .3, 1), opacity 260ms ease, box-shadow 220ms ease;
+    }
 
-.btn-primary:hover {
-    background-color: #002d7f;
-    transform: translateY(-3px);
     box-shadow: 0 12px 32px rgba(1, 28, 81, 0.25);
 }
 
@@ -1590,7 +1596,7 @@ transition: var(--transition);
     box-shadow: 0 20px 60px rgba(1, 28, 81, 0.18);
     transform: translateY(10px);
     opacity: 0;
-    transition: transform 260ms cubic-bezier(.2,.9,.3,1), opacity 260ms ease;
+    transition: transform 260ms cubic-bezier(.2, .9, .3, 1), opacity 260ms ease;
 }
 
 .modal[aria-hidden="false"] .modal-panel {
@@ -1623,6 +1629,48 @@ transition: var(--transition);
     margin-top: 6px;
 }
 
+/* Form within modal */
+.modal-body form {
+    margin-top: 6px;
+}
+
+.modal-body .form-row {
+    margin-bottom: 12px;
+}
+
+.modal-body label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="email"],
+.modal-body input[type="tel"],
+.modal-body textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-gray);
+    background: var(--color-secondary);
+    font-size: 0.95rem;
+    color: var(--color-text-dark);
+    transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 6px 20px rgba(0, 191, 255, 0.12);
+}
+
+#contact-form-feedback {
+    font-weight: 600;
+}
+
 .modal-points {
     margin: 12px 0 0 20px;
 }
@@ -1632,6 +1680,20 @@ transition: var(--transition);
     gap: 12px;
     justify-content: flex-end;
     margin-top: 18px;
+}
+
+/* Make primary action stand out inside modal */
+.modal-footer .btn-primary {
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+@media (max-width: 640px) {
+    .modal-panel {
+        padding: 20px;
+        margin: 12px;
+        max-width: 96%;
+    }
 }
 
 @media (max-width: 640px) {
