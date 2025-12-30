@@ -282,7 +282,7 @@ a {
 }
 
 .header.scroll-active .nav-link {
-    color: var(--color-text-light);
+    color: var(--color-primary);
 }
 
 .header.scroll-active .nav-link:hover {
@@ -1071,6 +1071,35 @@ transition: var(--transition);
 .nav-menu a:hover {
     color: var(--color-accent);
     border-bottom: 2px solid var(--color-accent);
+}
+
+/* Asegurar contraste cuando el header cambia al hacer scroll */
+/* Se colocan después para vencer reglas previas por cascada */
+.header.scroll-active .nav-menu a,
+.header.scroll-active .nav-menu .nav-link {
+    color: var(--color-primary);
+}
+
+.header.scroll-active .nav-menu a:hover,
+.header.scroll-active .nav-menu .nav-link:hover {
+    color: var(--color-accent);
+    background-color: transparent;
+}
+
+.header.scroll-active .hamburger span {
+    background-color: var(--color-text-light);
+}
+
+/* Destacar el botón demo cuando el header está activo */
+.header.scroll-active .btn-demo {
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    border-color: transparent;
+}
+
+/* Mejorar visibilidad del logo (imagen) sobre fondo oscuro */
+.header.scroll-active .logo img {
+    filter: brightness(1.2) contrast(1.02);
 }
 
 /* 2. SECCIÓN PRINCIPAL (HERO) */

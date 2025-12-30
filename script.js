@@ -10,13 +10,33 @@ document.addEventListener('DOMContentLoaded', function () {
 function initializeHeader() {
     const header = document.querySelector('.header');
 
-    window.addEventListener('scroll', function () {
+    const logoImg = document.querySelector('.logo img');
+    const topLogoSrc = logoImg ? logoImg.getAttribute('src') : 'img/logopng.png';
+
+    // Derivar la ruta del logo cuando se hace scroll conservando el mismo prefijo (soporta ../img/ y img/)
+    const lastSlash = topLogoSrc.lastIndexOf('/');
+    const prefix = lastSlash !== -1 ? topLogoSrc.slice(0, lastSlash + 1) : '';
+    const scrolledLogoSrc = prefix + 'logowhite.png';
+
+    // Preload scrolled logo to avoid flicker
+    if (scrolledLogoSrc) {
+        const _img = new Image();
+        _img.src = scrolledLogoSrc;
+    }
+
+    function updateHeader() {
         if (window.scrollY > 50) {
             header.classList.add('scroll-active');
+            if (logoImg) logoImg.src = scrolledLogoSrc;
         } else {
             header.classList.remove('scroll-active');
+            if (logoImg) logoImg.src = topLogoSrc;
         }
-    });
+    }
+
+    window.addEventListener('scroll', updateHeader);
+    // run once on load in case the page is already scrolled
+    updateHeader();
 }
 
 // ============ MOBILE MENU TOGGLE ============
@@ -68,6 +88,13 @@ function initializeScrollAnimations() {
             const currentHref = this.getAttribute('href');
             if (!currentHref || !currentHref.startsWith('#')) return;
 
+            // Special-case bare '#' to scroll to top (avoids invalid selector error)
+            if (currentHref === '#') {
+                e.preventDefault();
+                scrollToTop();
+                return;
+            }
+
             e.preventDefault();
             const targetId = currentHref;
             try {
@@ -80,7 +107,7 @@ function initializeScrollAnimations() {
                     });
                 }
             } catch (err) {
-                // invalid selector like '#' — ignore silently
+                // invalid selector — ignore silently
                 return;
             }
         });
