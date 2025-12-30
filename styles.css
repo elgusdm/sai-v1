@@ -1572,6 +1572,12 @@ transition: var(--transition);
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 220ms ease;
+}
+
+.modal[aria-hidden="false"] .modal-backdrop {
+    opacity: 1;
 }
 
 .modal-panel {
@@ -1583,6 +1589,13 @@ transition: var(--transition);
     max-width: 760px;
     box-shadow: 0 20px 60px rgba(1, 28, 81, 0.18);
     transform: translateY(10px);
+    opacity: 0;
+    transition: transform 260ms cubic-bezier(.2,.9,.3,1), opacity 260ms ease;
+}
+
+.modal[aria-hidden="false"] .modal-panel {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .modal-close {
