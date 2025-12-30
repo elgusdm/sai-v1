@@ -9,11 +9,13 @@
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
 .modal-cta:hover {
     background-color: #002d7f !important;
     color: var(--color-secondary) !important;
     box-shadow: 0 8px 24px rgba(1, 28, 81, 0.15);
 }
+
 /* VARIABLES DE COLOR */
 :root {
     --color-primary: #011C51;
@@ -1069,20 +1071,25 @@ transition: var(--transition);
     .modal-header .modal-title {
         font-size: 1.1rem;
     }
+
     .modal-subtitle {
         font-size: 0.95rem;
     }
+
     .modal-body label {
         font-size: 0.85rem;
     }
+
     .modal-body input,
     .modal-body textarea {
         font-size: 0.9rem;
         padding: 7px 8px;
     }
+
     .form-row {
         margin-bottom: 7px;
     }
+
     .btn,
     .btn-demo,
     .modal-cta {
@@ -1090,19 +1097,23 @@ transition: var(--transition);
         font-size: 0.95rem !important;
         border-radius: 7px !important;
     }
+
     .cta-content h2 {
         font-size: 1.2rem;
     }
+
     .section,
     .conocenos-section,
     .casos-section,
     .cta-section {
         padding: 32px 0 !important;
     }
+
     .mv-card {
         padding: 1rem 0.7rem;
         font-size: 0.97rem;
     }
+
     .footer-content {
         gap: 1rem;
     }
