@@ -376,14 +376,19 @@ function initializeContactModal() {
         document.body.style.overflow = '';
     }
 
-    // Open modal when CTA in #contacto is clicked
-    const cta = document.querySelector('#contacto .cta-content .btn.btn-accent.btn-large');
-    if (cta) {
-        cta.addEventListener('click', function (e) {
+    // Open modal when CTA in #contacto is clicked and when navbar demo buttons are clicked
+    const pageCtas = Array.from(document.querySelectorAll('#contacto .cta-content .btn.btn-accent.btn-large'));
+    const navDemos = Array.from(document.querySelectorAll('.btn-demo'));
+    const openers = pageCtas.concat(navDemos);
+
+    openers.forEach(el => {
+        if (!el) return;
+        el.addEventListener('click', function (e) {
+            // prevent default mailto or href
             e.preventDefault();
             openModal();
         });
-    }
+    });
 
     // Close handlers
     backdrop.addEventListener('click', closeModal);
