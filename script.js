@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeScrollAnimations();
     initializeScrollAnim();
     initializeServiceModal();
+    initializeContactModal();
 });
 
 // ============ HEADER SCROLL EFFECT ============
@@ -352,5 +353,84 @@ function initializeServiceModal() {
     function closeModal(m) {
         m.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+    }
+}
+
+// ============ CONTACT FORM MODAL (CTA) ============
+function initializeContactModal() {
+    const modal = document.getElementById('contact-modal');
+    if (!modal) return;
+
+    const backdrop = modal.querySelector('.modal-backdrop');
+    const closeBtns = modal.querySelectorAll('[data-modal-close]');
+    const form = document.getElementById('contact-form');
+    const feedback = document.getElementById('contact-form-feedback');
+
+    function openModal() {
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    // Open modal when CTA in #contacto is clicked
+    const cta = document.querySelector('#contacto .cta-content .btn.btn-accent.btn-large');
+    if (cta) {
+        cta.addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal();
+        });
+    }
+
+    // Close handlers
+    backdrop.addEventListener('click', closeModal);
+    closeBtns.forEach(b => b.addEventListener('click', closeModal));
+
+    // Form submit via fetch (Formsubmit)
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            feedback.style.display = 'none';
+            feedback.textContent = '';
+
+            // Basic validation
+            const name = form.querySelector('#name').value.trim();
+            const email = form.querySelector('#email').value.trim();
+            const message = form.querySelector('#message').value.trim();
+
+            if (!name || !email || !message) {
+                feedback.style.display = 'block';
+                feedback.style.color = 'var(--color-accent)';
+                feedback.textContent = 'Por favor completa los campos requeridos.';
+                return;
+            }
+
+            const action = form.getAttribute('action');
+            const formData = new FormData(form);
+
+            fetch(action, {
+                method: 'POST',
+                body: formData,
+                mode: 'cors'
+            }).then(resp => {
+                if (resp.ok) {
+                    feedback.style.display = 'block';
+                    feedback.style.color = 'green';
+                    feedback.textContent = 'Gracias — tu mensaje fue enviado.';
+                    form.reset();
+                    setTimeout(closeModal, 1600);
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            }).catch(err => {
+                feedback.style.display = 'block';
+                feedback.style.color = 'var(--color-accent)';
+                feedback.textContent = 'Ocurrió un error al enviar. Intenta de nuevo.';
+            });
+        });
     }
 }
