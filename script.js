@@ -26,7 +26,7 @@ function initializeHeader() {
     }
 
     function updateHeader() {
-        if (window.scrollY > 50) {
+        if (window.scrollY > 40) {
             header.classList.add('scroll-active');
             if (logoImg) logoImg.src = scrolledLogoSrc;
         } else {
