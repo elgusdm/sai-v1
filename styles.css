@@ -1150,12 +1150,12 @@ transition: var(--transition);
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .hero-title {
-    font-size: 3.5em;
+    font-size: 10em;
     margin-bottom: 20px;
     color: var(--color-accent);
     /* Título impactante con el color de acento */
